@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculate</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/calculate.html}" th:object="${calculator}">
+    <input th:type="text" name="firstField" th:value="${calculator.getFirstField()}">
+    <select id="operation" name="operation">
+        <option th:each="operation : ${T(ru.kharina.study.calculator.models.Operation).values()}"
+                th:value="${operation}" th:text="${operation.displayValue}" th:selected="${operation==calculator.getOperation()}">
+        </option>
+    </select>
+    <input th:type="text" name="secondField" th:value="${calculator.getSecondField()}"><br><br>
+    <input type="submit" value="=">
+    <p>Result</p>
+    <p th:text="${calculator.getResult()}"></p>
+    <p>History</p>
+    <textarea rows="10" name="history" th:text="${calculator.getHistory()}"></textarea>
+</form>
+
+</body>
+</html>
